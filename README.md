@@ -6,19 +6,22 @@ At the present, the web scraper requires `curl` and `htmlq` to be installed, and
 operating system. If you need to install them, some common shell command to do so are:
 
 ```bash Ubuntu
+# for Ubuntu
 apt install curl htmlq
 ```
 
 ```bash ArchLinux
+# for ArchLinux
 pacman -Syu
+pacman -S curl htmlq
 ```
 
 > Don't forget to add sudo, as needed, to elevate your permissions temporarily for installing system-level software.
 >> Alternatively, you could also download binaries for `curl` and `htmlq`, but that's outside the scope of this README.
 
-## HOWTO Run the Web Scraper / HTML Formatter
+## HOW TO: Run the Web Scraper / HTML Formatter
 There are standalone scripts that are currently in-development and contain hard-coded values for the request URL. This
-points to a page for nextjs documentation. The script downloads the public page once using curl, then formats the
+points to a page for `nextjs` documentation. The script downloads the public page once using curl, then formats the
 response using htmlq. The script works within a temporary directory, either /tmp or the "$HOME" directory as a fallback
 (if /tmp cannot be accessed).
 

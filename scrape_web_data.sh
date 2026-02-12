@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-# This script pulls information from a website
-# Renders and formats it for markdown input
-# And returns the result as a string
+## This script performs the following operations:
+# 1. pull information from a website via HTTP request
+# 2. render and format HTML text
+# 3. marshall/format HTML for markdown input file --> used later as a prompt/query to LLM.
+# returns: a string containing formatted markdown text, obtained by downloading and parsing a single web page's text contents
 
 # Check runtime dependencies
 HAS_CURL=0
@@ -23,6 +25,8 @@ else
   HAS_HTMLQ=1
 fi
 
+# NO early exits, set minimum state for this script and check for each operation instead.
+
 # after checking for software dependencies, create a temporary directory
 SCRAPE_DIR=/tmp/scrape
 mkdir -p "$SCRAPE_DIR"
@@ -30,7 +34,7 @@ EC1=$?
 
 # check exit code after working directory is created and move into it
 if [[ $EC1 == 0 ]]; then
-  # navigate to next directory, supressing STDOUT from pushd
+  # navigate to next directory, suppressing STDOUT from pushd
   pushd "$SCRAPE_DIR" 1>/dev/null
 else
   printf "Unable to create temporary directory. Exit code %s from 'mkdir %s'\n" "$EC1" "$SCRAPE_DIR"
@@ -39,7 +43,7 @@ else
 fi
 
 # set other shell variables for this script
-declare DOWNLOAD_URL='https://nextjs.org/docs#what-is-nextjs'
+declare DOWNLOAD_URL='https://nextjs.org/docs/app/getting-started/installation'
 declare DOWNLOAD_FILE="$PWD/download_webpage.html"
 declare FORMAT_FILE="$PWD/formatted_webpage.html"
 
@@ -77,7 +81,14 @@ else
   printf "%s\n" "ERROR: The file '$FORMAT_FILE' was not created / htmlq failed with error. Exit code: $EC3" 1>&2
 fi
 
-# return to original directory, supressing STDOUT from popd
+# print exit codes / all command statuses
+echo "exit codes"
+printf "%s\t" "EC1(mkdir) |" "EC2(touch) |" "EC3(cat|htmlq)"
+echo
+printf "%s\t" " EC1: $EC1    |" "EC2: $EC2     |" "EC3: $EC3"
+echo
+
+# return to original directory, suppressing STDOUT from popd
 popd 1>/dev/null
 
 # cleanup shell variables
