@@ -54,9 +54,8 @@ fi
 
 # if requirements have been met, run the download function
 if [[ $CAN_WRITE == 1 && $HAS_CURL == 1 && $HAS_HTMLQ == 1 ]]; then
-  # send a GET request with tool header, indicating that
-  # this request is from `curl`
-  # append data to headers instead of POST body with --head/-I
+  # send a GET request with POST data for tool, indicating that
+  # this request is from the `curl` program.
   curl --get --data "tool=curl" \
     --retry-delay 5 --retry 7 "$DOWNLOAD_URL" >"$DOWNLOAD_FILE"
 fi
