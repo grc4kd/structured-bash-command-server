@@ -20,11 +20,10 @@ CSS_SELECTOR='p'
 usage() {
   echo "Usage: $0 [OPTIONS]"
   echo "Options:"
-  echo "  -u, --url URL             Set the URL to scrape (default: $DOWNLOAD_URL)"
-  echo "  -o, --output FILE         Set output filename (default: $OUTPUT_FILE)"
-  echo "  -s, --selector CSS_SELECTOR"
-  echo "      Set output filename (default: $OUTPUT_FILE)"
-  echo "  -h, --help                Show this help message"
+  echo "  -u, --url URL                Set the URL to scrape (default: $DOWNLOAD_URL)"
+  echo "  -o, --output FILE            Set output filename (default: $OUTPUT_FILE)"
+  echo "  -s, --selector CSS_SELECTOR  Set the CSS selector HTML uses to select elements before pretty printing"
+  echo "  -h, --help                   Show this help message"
   exit 1
 }
 
